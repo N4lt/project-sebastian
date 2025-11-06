@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kartu Informasi</title>
+    <style>
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        ul.fact-list {
+            transition: opacity 0.5s ease;
+        }
+
+        body {
+            background-color: #a4adff;
+            padding: 40px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            padding: 40px;
+            text-align: center;
+            background-image: url("Background.gif");
+        }
+
+        img{
+            height: 250px;
+            width: 500px;
+        }
+
+        div.card{
+            width: 1000px;
+            height: 600px;
+            background-color: rgba(219, 220, 226, 0.26);
+            text-align: center;
+            border-radius: 50px;
+        }
+
+        h2{
+            text-align: center;
+            font-family: "ab";
+            color:rgba(255, 99, 26, 0.973);
+            font-size: 35px;
+        }
+
+        p.subtitle{
+            text-align: center;
+            font-family: "ab";
+            color:antiquewhite;  
+            font-size: 25px;          
+        }
+
+        ul{
+            text-align: center;
+            font-family: "ab";
+            color: rgba(104, 255, 222, 0.753);   
+            font-size: 20px;         
+        }
+
+        @font-face {
+                font-family: "ab";
+                src: url("Riope.ttf");
+        }
+
+    </style>
+</head>
+<body>
+    <center>
+    <div class="card">
+    <div class="card-fakta">
+        <img src="Space.gif" alt="Gambar Ilustrasi" id="factImage">
+        <div class="content">
+            <h2>Fakta - Fakta Menarik Tentang Luar Angkasa</h2>
+            <p class="subtitle">Tahukah kamu Fakta - Fakta Unik Ini?</p>
+            <ul class="fact-list" id="factList">
+                <li>Luar angkasa benar-benar sunyi.</li>
+                <li>Cahaya Matahari butuh 8 menit 20 detik ke Bumi.</li>
+                <li>Bulan menjauh 3,8 cm per tahun.</li>
+                <li>Saturnus bisa mengapung di air.</li>
+            </ul>
+            <button class="btn-next" id="nextfact">Fakta selanjutnya</button>
+        </div>
+    </div>
+    </div>
+    </center>
+
+    <script>
+        const factData = [
+            {
+                image: "Blackhole.gif",
+                facts: [
+                    "Gravitasi black hole sangat kuat bahkan cahaya pun tidak bisa lolos darinya.",
+                    "Waktu berjalan lebih lambat di dekat black hole (efek relativitas Einstein).",
+                    "Beberapa black hole terbentuk dari bintang yang mati dan runtuh akibat gravitasinya sendiri.",
+                    "Black hole bisa “menguap” perlahan lewat radiasi Hawking dan akhirnya lenyap sepenuhnya.",
+                ]
+            },
+            {
+                image: "Galaxy.gif",
+                facts: [
+                    "Galaksi Bima Sakti punya lebih dari 100 miliar bintang.",
+                    "Ada galaksi yang bisa bertabrakan dan menyatu membentuk galaksi baru.",
+                    "Semua galaksi besar punya lubang hitam supermasif di pusatnya.",
+                    "Galaksi tidak diam — mereka terus bergerak dan menjauh satu sama lain karena ekspansi alam semesta.",
+                ]
+            },
+            {
+                image: "Bintang.gif",
+                facts: [
+                    "Bintang itu bukan titik kecil — semuanya adalah bola gas raksasa seperti Matahari.",
+                    "Warna bintang menunjukkan suhunya: biru paling panas, merah paling dingin.",
+                    "Bintang lahir dari awan gas dan debu yang disebut nebula.",
+                    "Bintang bisa hidup miliaran tahun sebelum mati.",
+                ]
+            },
+            {
+                image: "Supernova.gif",
+                facts: [
+                    "Dalam beberapa detik, supernova bisa melepaskan lebih banyak energi daripada Matahari selama seluruh hidupnya.",
+                    "Sisa ledakan supernova bisa menjadi bintang neutron atau lubang hitam.",
+                    "Supernova bisa terlihat dari miliaran tahun cahaya jauhnya.",
+                    "Gelombang kejut supernova membantu melahirkan bintang-bintang baru di nebula sekitarnya.",
+                ]
+            },
+        ];
+
+        const factList = document.getElementById("factList");
+        const factImage = document.getElementById("factImage");
+        const nextBtn = document.getElementById("nextfact");
+
+        nextBtn.addEventListener("click", () => {
+            factList.classList.add("fade-out");
+            setTimeout(() => {
+                const randomFact = factData[Math.floor(Math.random() * factData.length)];
+                factImage.style.opacity = 0;
+
+                setTimeout(() => {
+                    factImage.src = randomFact.image;
+                    factImage.style.opacity = 1;
+                }, 400);
+
+                factList.innerHTML = randomFact.facts.map(f => `<li>${f}</li>`).join("");
+                factList.classList.remove("fade-out");
+            }, 500);
+        });
+    </script>
+</body>
+</html>
